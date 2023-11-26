@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class Item {
   final String _name;
   final double _price;
