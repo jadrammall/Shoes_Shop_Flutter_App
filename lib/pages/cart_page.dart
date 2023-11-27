@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:project1/model/cart_model.dart';
 import 'package:provider/provider.dart';
+import 'package:input_quantity/input_quantity.dart';
 
-class CartPage extends StatelessWidget {
+class CartPage extends StatefulWidget {
   const CartPage({super.key});
 
+  @override
+  State<CartPage> createState() => _CartPageState();
+}
+
+class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +45,7 @@ class CartPage extends StatelessWidget {
               Expanded(
                 child: ListView.builder(
                   itemCount: value.cartItems.length,
-                  padding: const EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(8),
                   itemBuilder: (context,index) {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -55,10 +61,16 @@ class CartPage extends StatelessWidget {
                           ),
                           title: Text(value.cartItems[index][0]),
                           subtitle: Text('\$${value.cartItems[index][1]}'),
-                          trailing: IconButton(
-                            icon: const Icon(Icons.cancel),
-                            onPressed: () =>
-                                Provider.of<CartModel>(context, listen: false).removeItemFromCart(index),
+                          trailing: InputQty(
+                            maxVal: 100,
+                            minVal: 1,
+                            initVal: 1,
+                            steps: 1,
+                            onQtyChanged: (val) {
+                              setState(() {
+                                value.cartItems[index][4] = val;
+                              });
+                            },
                           ),
                         ),
                       ),

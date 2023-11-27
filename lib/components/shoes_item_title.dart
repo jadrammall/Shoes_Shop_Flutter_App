@@ -6,6 +6,8 @@ class ShoesItemTitle extends StatelessWidget {
   final String imagePath;
   final color;
   void Function()? onPressed;
+  final double qty;
+
 
   ShoesItemTitle({
     super.key,
@@ -14,6 +16,7 @@ class ShoesItemTitle extends StatelessWidget {
     required this.imagePath,
     required this.color,
     required this.onPressed,
+    required this.qty,
   }
       );
 

@@ -73,6 +73,7 @@ class HomePage extends StatelessWidget {
                         onPressed: () {
                           Provider.of<CartModel>(context, listen: false).addItemToCart(index);
                         },
+                        qty: value.shopItems[index][4],
                       );
                     },
                   );
