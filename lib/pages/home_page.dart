@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '/model/item.dart';
 
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -20,11 +21,7 @@ class _HomePageState extends State<HomePage> {
     }
     return Scaffold(
       appBar: AppBar(
-        title: Image.asset(
-          'assets/images/logo.png',
-          height: 50,
-          width: 50,
-        ),
+        title: Image.asset('assets/images/logo2.png', height: 50, width: 50,),
         centerTitle: true,
         actions: [
           // displays reset icon in AppBar
@@ -64,6 +61,7 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 24),
             child: Text(
@@ -74,68 +72,128 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
+
           const SizedBox(height: 24),
+
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 24),
             child: Divider(),
           ),
+
           const SizedBox(height: 24),
+
           Expanded(
-            child: ListView.builder(
-              itemCount: items.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: Container(
-                    padding: const EdgeInsets.all(50),
-                    decoration: BoxDecoration(
-                      color: const Color.fromRGBO(192, 192, 192, 1.0),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Column(
+            child:
+            _showSelected ? ShowSelectedItems(width: screenWidth) :
+            ListView.builder(
+            itemCount: items.length,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.all(12),
+                child: Container(
+                  padding: const EdgeInsets.all(50),
+                  decoration: BoxDecoration(
+                    color: const Color.fromRGBO(192, 192, 192, 1.0),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
                       children: [
-                        Image.asset(
-                          items[index].image,
-                          height: 150,
-                          width: 200,
-                        ),
+                        Image.asset(items[index].image ,height: 150,width: 200,),
+
                         SizedBox(width: screenWidth * 0.24),
-                        Text(
-                          items[index].name,
-                          style: const TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
+
+                        Text(items[index].name, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+
                         Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Checkbox(
-                                value: items[index].selected,
-                                onChanged: (e) {
-                                  items[index].selected = e as bool;
-                                  if (items[index].selected) {
-                                    // add its price to total price
-                                    _sum += items[index].price;
-                                  } else {
-                                    // subtract its price from total price
-                                    _sum -= items[index].price;
-                                  }
-                                  setState(() {});
-                                },
-                              ),
-                              Text(
-                                '\$${items[index].price}',
-                                style: const TextStyle(fontSize: 15),
-                              ),
-                            ]),
+                          Checkbox(
+                            value: items[index].selected,
+                            onChanged: (e) {
+                              items[index].selected = e as bool;
+                              if (items[index].selected) {
+                                // add its price to total price
+                                _sum += items[index].price;
+                              } else {
+                                // subtract its price from total price
+                                _sum -= items[index].price;
+                              }
+                              setState(() {});
+                            },
+                          ),
+                          Text('\$${items[index].price}', style: const TextStyle(fontSize: 15),),
+                        ]),
+
                       ],
-                    ),
                   ),
-                );
+                  ),
+              );
               },
             ),
           ),
+
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                color: Colors.deepPurple,
+              ),
+              padding: const EdgeInsets.all(12),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Total Price',
+                        style: TextStyle(color: Colors.white),
+                      ),
+
+                      const SizedBox(height: 8),
+                      // total price
+                      Text(
+                        '\$$_sum',
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  // pay now
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.green.shade200),
+                      borderRadius: BorderRadius.circular(28),
+                    ),
+                    padding: const EdgeInsets.all(12),
+                    child: const Row(
+                      children: [
+                        Text(
+                          'Pay Now',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          size: 16,
+                          color: Colors.white,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
+
         ],
       ),
+
     );
   }
+
 }
