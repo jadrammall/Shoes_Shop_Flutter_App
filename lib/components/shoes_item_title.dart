@@ -14,7 +14,8 @@ class ShoesItemTitle extends StatelessWidget {
     required this.imagePath,
     required this.color,
     required this.onPressed,
-  });
+  }
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -29,14 +30,21 @@ class ShoesItemTitle extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Image.asset(imagePath, height: 64),
+            Image.asset(
+                imagePath,
+                height: 100
+            ),
+
             Text(itemName),
+
+            Text('\$$itemPrice'),
+
             MaterialButton(
               onPressed: onPressed,
               color: color[800],
-              child: Text(
-                '\$$itemPrice',
-                style: const TextStyle(
+              child: const Text(
+                'Add to cart',
+                style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),

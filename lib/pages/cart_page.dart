@@ -11,6 +11,19 @@ class CartPage extends StatelessWidget {
       appBar: AppBar(
         title: Image.asset('assets/images/logo.png', height: 50, width: 50,),
         centerTitle: true,
+        actions: [
+          Tooltip(
+            message: 'Reset selection',
+            child: IconButton(
+              onPressed: () {
+                Provider.of<CartModel>(context, listen: false).removeAllItemsFromCart();
+              },
+              icon: const Icon(
+                Icons.restore,
+              ),
+            ),
+          ),
+        ],
       ),
       body: Consumer<CartModel>(
         builder: (context, value, child){
