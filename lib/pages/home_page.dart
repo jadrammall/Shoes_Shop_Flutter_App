@@ -12,7 +12,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Image.asset(
-          'assets/images/logo2.png',
+          'assets/images/logo.png',
           height: 50,
           width: 50,
         ),
