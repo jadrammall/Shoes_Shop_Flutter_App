@@ -1,4 +1,4 @@
-# project1
+# Shoes_Shop_Flutter_App
 
 A new Flutter project.
 
